@@ -17,15 +17,19 @@ class User extends React.Component {
           <div className="card-content">
             <div className="media">
               <div className="media-content">
-                <p className="title is-4 has-text-primary">{this.props.first}</p>
+                <p className="title is-4 has-text-primary">{this.props.firstname} {this.props.lastName}</p>
                 <hr/>
-                <p className="subtitle is-size-6">{this.props.quote}</p>
+                <p className="subtitle is-size-6">date of birth: {this.props.dob}</p>
+                <hr/>
+                <p className="subtitle is-size-6">Class: {this.props.class}</p>
+                <hr/>
+                <p className="subtitle is-size-6">{this.props.intro}</p>
                 {/*delete the prop with requested id from the function invoked in the parent component*/}
                 <button className="button is-danger" type="button" onClick={() => {this.props.handleDelete(this.props.id);}}>
                   Delete
                 </button>
                 {/*load the EditUser component via React Router and send the id over to the EditUser component*/}
-                <Link to={`/edit-user/${this.props.id}`}>
+                <Link to={`/edit-student/${this.props.id}`}>
                   <button className="button is-primary" type="button">
                   Edit
                   </button>

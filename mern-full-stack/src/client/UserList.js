@@ -11,31 +11,31 @@ import './app.css';
 //MAKE SURE TO INSTALL USING npm install bulma
 import 'bulma/css/bulma.css';
 
-// this component will handle all elements in the users array
+// this component will handle all elements in the student array
 class UserList extends Component {
     constructor(props) {
         super(props);
-        // store the users array in the state
-        this.state = { users: [] };
+        // store the student array in the state
+        this.state = { student: [] };
 
         //this binding is necessary to make `this` work in the callback
         //generally, if you refer to a method without () after it, such as onClick={this.handleClick}, you should bind that method
-        this.updateUsers = this.updateUsers.bind(this);
+        this.updatestudent = this.updatestudent.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
 
     // fetch all user data from the server when the component mounts
     componentDidMount() {
-        this.updateUsers();
+        this.updatestudent();
     }
 
     //
-    updateUsers() {
-        // get the users API using axios GET request to the server 
-        axios.get('api/users')
+    updatestudent() {
+        // get the student API using axios GET request to the server
+        axios.get('api/student')
             .then(response => {
                 //store the response in the state
-                this.setState({ users: response.data });
+                this.setState({ student: response.data });
             })
             .catch(error => {
                 console.log(error);
@@ -45,14 +45,14 @@ class UserList extends Component {
     handleDelete(userId) {
         // make a DELETE request to the server which will handle the removal of the user with the specific userId
         axios
-            .delete('api/users', {
+            .delete('api/student', {
                 data: {
                     id: userId
                 }
             })
             .then(response => {
-                //if the deletion was successful then re-render the list of users
-                this.updateUsers();
+                //if the deletion was successful then re-render the list of student
+                this.updatestudent();
             })
             .catch(error => {
                 console.log(error);
@@ -61,30 +61,31 @@ class UserList extends Component {
 
     render() {
         // produce a User component for each user object
-        const userList = this.state.users.map(u => (
+        const userList = this.state.student.map(u => (
             //map through each element in the array and set to the value received from the server
             <User
                 key={u._id}
                 id={u._id}
-                title={u.title}
-                first={u.first}
+                firstname={u.firstname}
                 lastName={u.lastName}
                 image={u.picture}
-                quote={u.quote}
+                class={u.class}
+                intro ={u.intro}
+                dob={u.dob}
                 //you must include the handleDelete method to use in child components
                 handleDelete={this.handleDelete}
             />
         ));
 
-        //return the list of users
+        //return the list of student
         return (
             <div className="is-fluid">
                 {/*Navigation bar*/}
                 <nav className="navbar">
-                    <h1 className="navbar-item title is-1 has-text-primary">List of Users</h1>
+                    <h1 className="navbar-item title is-1 has-text-primary">List of student</h1>
                     {/*when this button is pressed, CreateUser component will be rendered by using React Router*/}
-                    <Link to={'/create-user'} className="navbar-item navbar-end">
-                        <button className="button is-warning" type="button">Create new user</button>
+                    <Link to={'/create-student'} className="navbar-item navbar-end">
+                        <button className="button is-warning" type="button">Add new user</button>
                     </Link>
                 </nav>
                 <hr />

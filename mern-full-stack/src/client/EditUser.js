@@ -12,10 +12,12 @@ class EditUser extends Component {
         // store the related to the user information into the state
         // these should match the user object from the API
         this.state = {
-            title: '',
-            first: '',
+            firstname: '',
             lastName: '',
-            quote: '',
+            nbfriend: '',
+            nbpost:'',
+            intro:'',
+            dob:'',
             picture: ''
         };
 
@@ -28,15 +30,16 @@ class EditUser extends Component {
     // fetch the related user data
     componentDidMount() {
         // get the users API and include the id which is passed via the URL and accessed via props
-        axios.get('/api/users/' + this.props.match.params.id)
+        axios.get('/api/student/' + this.props.match.params.id)
             .then(response => {
                 //on resonse set the state values to match empty state values set in the constructor
                 this.setState({
                     _id: response.data._id,
-                    title: response.data.title,
-                    first: response.data.first,
+                    firstname: response.data.firstname,
                     lastName: response.data.lastName,
-                    quote: response.data.quote,
+                    class:response.data.class,
+                    intro: response.data.intro,
+                    dob: response.data.dob,
                     picture: response.data.picture,
                 });
             })
@@ -59,7 +62,7 @@ class EditUser extends Component {
         event.preventDefault();
 
         // use axios to send a PUT request to the server which includes the updated state information
-        axios.put('/api/users', this.state)
+        axios.put('/api/student', this.state)
             //on success go to home
             .then(res => this.props.history.push('/'))
             .catch(error => {
@@ -81,15 +84,15 @@ class EditUser extends Component {
                         <div className="columns">
                             <div className="column is-half">
                                 <div className="field">
-                                    <label className="label"> Title: </label>
+                                    <label className="label"> First Name: </label>
                                     <div className="control">
-                                        <input className="input is-small" type="text" name="title" value={this.state.title} onChange={this.handleChange} id="form" />
+                                        <input className="input is-small" type="text" name="firstname" value={this.state.firstname} onChange={this.handleChange} id="form" />
                                     </div>
                                 </div>
                                 <div className="field">
-                                    <label className="label"> First Name: </label>
+                                    <label className="label"> Class:</label>
                                     <div className="control">
-                                        <input className="input is-small" type="text" name="first" value={this.state.first} onChange={this.handleChange} id="form" />
+                                        <input className="input is-small" type="text" name="class" value={this.state.class} onChange={this.handleChange} id="form" />
                                     </div>
                                 </div>
                                 <div className="field">
@@ -108,9 +111,15 @@ class EditUser extends Component {
                                     </div>
                                 </div>
                                 <div className="field">
-                                    <label className="label"> Quote: </label>
+                                    <label className="label"> date of birth: </label>
                                     <div className="control">
-                                        <input className="input is-small" type="text" name="quote" value={this.state.quote} onChange={this.handleChange} id="form" />
+                                        <input className="input is-small" type="text" name="dob" value={this.state.dob} onChange={this.handleChange} id="form" />
+                                    </div>
+                                </div>
+                                <div className="field">
+                                    <label className="label"> intro: </label>
+                                    <div className="control">
+                                        <input className="input is-small" type="text" name="intro" value={this.state.intro} onChange={this.handleChange} id="form" />
                                     </div>
                                 </div>
                             </div>

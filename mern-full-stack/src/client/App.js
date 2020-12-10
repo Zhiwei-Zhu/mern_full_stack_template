@@ -13,9 +13,9 @@ const App = () => {
         {/*SERVERSIDE: Link the routes to components*/}
         <Route exact path="/" component={UserList}/>
         {/*pass the id through the EditUser component*/}
-        <Route path="/edit-user/:id" component={EditUser}/>
-        {/*set the path to create a new user to CreateUser component*/}
-        <Route path="/create-user" component={CreateUser}/>
+        <Route path="/edit-student/:id" component={EditUser}/>
+        {/*set the path to create a new student to CreateUser component*/}
+        <Route path="/create-student" component={CreateUser}/>
       </div>
     </HashRouter>
   );

@@ -10,12 +10,13 @@ class CreateUser extends Component {
     constructor(props) {
         super(props);
         // the form fields are stored in a state
-        this.state = { 
-            title: '', 
-            first: '', 
-            lastName: '', 
-            quote: '', 
-            picture: '' 
+        this.state = {
+            firstname: '',
+            lastName: '',
+            picture: '',
+            class:'',
+            intro:'',
+            dob:'',
         };
 
         //this binding is necessary to make `this` work in the callback
@@ -38,7 +39,7 @@ class CreateUser extends Component {
         event.preventDefault();
 
         //use axios to send a POST request to the server which includes the state information for the new user to be created
-        axios.post('/api/users', this.state)
+        axios.post('/api/student', this.state)
             //on success go to home
             .then(res => this.props.history.push('/'))
             .catch(error => {
@@ -60,15 +61,15 @@ class CreateUser extends Component {
                     <div className="columns">
                         <div className="column is-half">
                             <div className="field">
-                                <label className="label"> Title: </label>
+                                <label className="label"> First Name: </label>
                                 <div className="control">
-                                    <input className="input is-small" type="text" name="title" value={this.state.title} onChange={this.handleChange} id="form" />
+                                    <input className="input is-small" type="text" name="firstname" value={this.state.firstname} onChange={this.handleChange} id="form" />
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label"> First Name: </label>
+                                <label className="label"> Class:</label>
                                 <div className="control">
-                                    <input className="input is-small" type="text" name="first" value={this.state.first} onChange={this.handleChange} id="form" />
+                                    <input className="input is-small" type="text" name="class" value={this.state.class} onChange={this.handleChange} id="form" />
                                 </div>
                             </div>
                              <div className="field">
@@ -87,9 +88,15 @@ class CreateUser extends Component {
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label"> Quote: </label>
+                                <label className="label"> date of birth: </label>
                                 <div className="control">
-                                    <input className="input is-small" type="text" name="quote" value={this.state.quote} onChange={this.handleChange} id="form" />
+                                    <input className="input is-small" type="text" name="dob" value={this.state.dob} onChange={this.handleChange} id="form" />
+                                </div>
+                            </div>
+                            <div className="field">
+                                <label className="label"> intro: </label>
+                                <div className="control">
+                                    <input className="input is-small" type="text" name="intro" value={this.state.intro} onChange={this.handleChange} id="form" />
                                 </div>
                             </div>
                         </div>
