@@ -2,7 +2,7 @@
 ###### 1. Set up project
 ```linux
 # clone this repository 
-git clone https://github.com/georgeBl/mern_full_stack_template
+git clone https://github.com/Zhiwei-Zhu/mern_full_stack_template
 
 # go inside the root folder
 cd mern-full-stack
